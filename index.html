@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        .game-container {
+            text-align: center;
+        }
+        canvas {
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .score-container {
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+            margin: 20px auto;
+        }
+        .score {
+            font-size: 24px;
+            margin: 0;
+        }
+        .multiplier {
+            font-size: 24px;
+            color: #FFD700;
+            margin: 0;
+        }
+        .high-score {
+            font-size: 24px;
+            color: #FF5252;
+            margin: 0;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+        .speed-control {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .speed-control label {
+            font-size: 16px;
+        }
+        input[type="range"] {
+            width: 200px;
+            height: 5px;
+            background: #333;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #4CAF50;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .speed-value {
+            min-width: 40px;
+            text-align: center;
+        }
+        .poison-timer {
+            width: 100%;
+            height: 5px;
+            background: #333;
+            margin-top: 5px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .poison-timer-bar {
+            height: 100%;
+            background: #000;
+            width: 100%;
+            transition: width 0.1s linear;
+        }
+        .game-info {
+            text-align: left;
+            margin-top: 20px;
+            padding: 10px;
+            background: #1e1e1e;
+            border-radius: 5px;
+            width: 400px;
+        }
+        .game-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .food-type {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+        .regular-food {
+            background: #FF5252;
+        }
+        .poison-food {
+            background: #000;
+        }
+        .bonus-food {
+            background: #FFD700;
+        }
+        .speed-food {
+            background: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="score-container">
+            <p class="score">Score: <span id="score">0</span></p>
+            <p class="multiplier">Multiplier: <span id="multiplier">1x</span></p>
+            <p class="high-score">High Score: <span id="highScore">0</span></p>
+        </div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div class="speed-control">
+            <label for="speedSlider">Speed:</label>
+            <input type="range" id="speedSlider" min="50" max="200" value="100">
+            <span class="speed-value" id="speedValue">100</span>
+        </div>
+        <div class="controls">
+            <button id="startBtn">Start Game</button>
+            <button id="restartBtn">Restart</button>
+        </div>
+        <div class="game-info">
+            <p><span class="food-type regular-food"></span> Regular Food: +10 points</p>
+            <p><span class="food-type poison-food"></span> Poison Food: Game Over</p>
+            <p><span class="food-type bonus-food"></span> Bonus Food: +30 points</p>
+            <p><span class="food-type speed-food"></span> Speed Food: Temporary speed boost</p>
+            <p>Collect food quickly to increase your multiplier!</p>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
